@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.jiesoft.ip</groupId>
+    <artifactId>ipmq-root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>ip-clientmq</artifactId>
+  <name>IP-ClientMq</name>
+  
+  
+	<dependencies>
+    
+    <!-- spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${springframework.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${springframework.version}</version>
+    </dependency>
+    <dependency>  
+        <groupId>org.springframework</groupId>  
+        <artifactId>spring-jms</artifactId>  
+        <version>${springframework.version}</version>  
+    </dependency>
+    <!-- xbean 如<amq:connectionFactory /> -->
+    <dependency>
+        <groupId>org.apache.xbean</groupId>
+        <artifactId>xbean-spring</artifactId>
+        <version>3.16</version>
+    </dependency>
+    
+    <!-- activemq -->
+    <dependency>  
+        <groupId>org.apache.activemq</groupId>  
+        <artifactId>activemq-core</artifactId>  
+        <version>5.7.0</version>
+    </dependency> 
+    <dependency>  
+        <groupId>org.apache.activemq</groupId>  
+        <artifactId>activemq-pool</artifactId>  
+        <version>5.12.1</version>  
+    </dependency> 
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty.aggregate</groupId>
+			<artifactId>jetty-all-server</artifactId>
+			<version>8.1.18.v20150929</version>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix></classpathPrefix>
+							<mainClass>com.xx.xx.xx</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<!--  -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+		<resources>
+			<!-- xml -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/mapping/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**</exclude>
+				</excludes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+	</build>
+	
+</project>

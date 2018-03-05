@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd-4.0">
+
+	<bean id="Server" class="org.eclipse.jetty.server.Server"
+		init-method="start" destroy-method="stop">
+		<property name="connectors">
+			<list>
+				<bean id="Connector" class="org.eclipse.jetty.server.nio.SelectChannelConnector">
+					<property name="port" value="9081" />
+				</bean>
+			</list>
+		</property>
+
+		<property name="handler">
+			<bean id="handlers" class="org.eclipse.jetty.server.handler.HandlerList">
+				<property name="handlers">
+					<list>
+						<ref bean="jettyServerHandler" />
+						<bean class="org.eclipse.jetty.server.handler.DefaultHandler" />
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="jettyServerHandler" class="com.jiesoft.framework.server.JettyServerHandler" scope="singleton"> 
+		<property name="serviceMap">
+			<map>
+				<!-- 
+				<entry key="/demoJettyService">
+					<bean class="com.jiesoft.framework.demo.service.DemoJettyServiceImpl"></bean>
+				</entry>
+				-->
+
+				<entry key="/ipJettyService" >
+					<ref bean="ipJettyService"/>
+				</entry>
+				
+			</map>
+		</property>
+	</bean>
+
+    <bean id="ipJettyService" class="com.jiesoft.ip.service.IpJettyServiceImpl">
+    	<!-- <property name="ipService" ref="ipService" /> -->
+    </bean>
+	
+	<import resource="./application-busiservice-context.xml" />
+
+</beans>

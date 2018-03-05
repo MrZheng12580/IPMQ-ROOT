@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.jiesoft.ip</groupId>
+  <artifactId>ipmq-root</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <packaging>pom</packaging>
+  <name>IPMQ-ROOT</name>
+  
+  <modules>
+  	<module>ip-clientmq</module>
+  	<module>ip-servermq</module>
+  </modules>
+
+	<!-- properties start -->
+	<properties>
+		<root.version>0.0.1-SNAPSHOT</root.version>
+		<slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
+		<junit.version>4.10</junit.version>
+		<springframework.version>4.0.6.RELEASE</springframework.version>
+		<maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>2.6</maven-resources-plugin.version>
+		<maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+	</properties>
+	<!-- properties end -->
+	
+
+
+	<dependencies>
+		<!-- slf4j start-->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-log4j12.version}</version>
+		</dependency>
+		<!-- slf4j end-->
+		
+		<!-- junit start-->
+	    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>${junit.version}</version>
+	      <scope>test</scope>
+	    </dependency>
+    	<!-- junit end-->
+    	
+	</dependencies>
+	
+		
+	<!-- nexus repository start-->
+	<repositories>
+		<repository>
+			<id>ruizhi</id>
+			<name>ruizhi</name>
+			<url>http://112.74.79.74:8081/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>ruizhi</id>
+			<name>ruizhi</name>
+			<url>http://112.74.79.74:8081/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<repository>
+			<id>ruizhi-releases</id>
+			<name>Ruizhi Release Repository</name>
+			<url>http://112.74.79.74:8081/nexus/content/repositories/releases/</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>ruizhi-snapshots</id>
+			<name>Ruizhi Snapshot Repository</name>
+			<url>http://112.74.79.74:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<!-- nexus repository end-->
+
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			<!-- test -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- resource -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin.version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+		
+</project>
